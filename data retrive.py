@@ -1,33 +1,29 @@
-### data retrive from stock market
 import calendar
-from datetime import datetime
-from time import strftime
-C_year = 2022
-list2 = []
-x = datetime.now()
-month_number = x.strftime("%m")
+from time import time
+import zipfile
+import requests
+from zipfile import ZipFile
+import os
+from datetime import date, datetime
+x= datetime.now()
 
+def get_data(time_frame):
+    date = time_frame
+    C_year = x.strftime("%Y")
+    # date = x.strftime("%d")
+    C_month = x.strftime("%b").upper()
+    data = ("https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{Ydate}{month}{year}bhav.csv.zip".format(year= C_year, month=C_month,Ydate =date))
+    print(data)
+    File_name = ("{date}_{month}_{year}.zip".format(date= date,month=C_month, year= C_year ))
+    print(type(File_name))
 
-list = []
-for i in range(1,int(month_number)):
+    download = requests.get(data)
+    with open (File_name,"wb") as f:
+        f.write(download.content)
+    with ZipFile(File_name,"r") as zip:
+        zip.extractall()
+    os.remove(File_name)    
 
-    val = (calendar.month_abbr[i])
-    # print(datetime.strftime(i, %m))
-    list.append(val)
-    # print(val)
+input = int(input("Enter the required date within this month (add 0 if its single digit) "))
 
-# list.pop(0)
-print(list)
-
-for a in list:
-    for date in range(1,32):
-        
-        # list2.append(dates)
-        data = ("https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{Ydate}{month}{year}bhav.csv.zip".format(year= C_year, month=a,Ydate =date ))
-        list2.append(data)
-print(list2)
-# # print(month_number)
-# print(type(month_number))
-
-# y = range(int(month_number))
-# print(y)
+get_data(input)
