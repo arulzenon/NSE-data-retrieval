@@ -12,9 +12,9 @@ from datetime import date, datetime
 x = datetime.now()
 month_list = []
 ulr_list = []
-# output_dir = "D:\NSE Stock data"
-file_name = "NSE data"
-zipf = ".zip"
+output_dir = './NSE_data'
+
+
 
 
 def old_data(year, month_num=15):    
@@ -48,7 +48,7 @@ def old_data(year, month_num=15):
     
     # Creates a URL for every day
     for a in Umonth_list:
-        for date in range(1,31):
+        for date in range(1,32):
             DDdate = str(date)
             data = ("https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{Ydate}{month}{year}bhav.csv.zip".format(year= C_year, month=a,Ydate =DDdate.zfill(2)))
             ulr_list.append(data)
@@ -56,18 +56,21 @@ def old_data(year, month_num=15):
     # print(ulr_list[-2])
     
     # Starts to download file for every day
-    for links in ulr_list:
-        print(links)
-        wget.download(links)
+    for links in range(len(ulr_list)):
         
-        # for i in range(len(ulr_list)):
-        #     download = requests.get(links)
-        #     status_code = download.status_code
-        #     print(status_code)
-        #     # if  status_code > 0:
-        # with open (file_name,"wb") as f:
-        #     f.write(download.content)
+        
+        running_site = ulr_list[links]
+        print(running_site)
+        web_status = requests.get(running_site,allow_redirects=False).is_redirect
+        print(web_status)
+        
+        if web_status == False:
+        
+            wget.download(running_site, out=output_dir)
 
+    
+        
+        
 
             
         
