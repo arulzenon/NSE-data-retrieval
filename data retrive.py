@@ -6,11 +6,14 @@ import os
 from zipfile import ZipFile
 from datetime import date, datetime
 x= datetime.now()
+today = x.strftime("%d")
+
+
 
 def get_data(time_frame):
     date = time_frame
     C_year = x.strftime("%Y")
-    # date = x.strftime("%d")
+    date = x.strftime("%d")
     C_month = x.strftime("%b").upper()
     data = ("https://archives.nseindia.com/content/historical/EQUITIES/{year}/{month}/cm{Ydate}{month}{year}bhav.csv.zip".format(year= C_year, month=C_month,Ydate =date))
     print(data)
@@ -29,6 +32,8 @@ def get_data(time_frame):
 
 input = int(input("Enter the required date within this month (add 0 if its single digit) "))
 
-get_data(input)
+get_data(today.zfill(2))
+
+            
 
             # download = requests.get(b,allow_redirects=False)
