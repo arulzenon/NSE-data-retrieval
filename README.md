@@ -14,4 +14,4 @@ Code helps you to retrieve stock data from the NSE archive
   - This helps to extract downloaded Zip files to CSV
   - Just change the ```dir_name``` to your respective path
   -run the program to see the magic will happen in the very next seconds
-#### Note: All Data may not be adjusted to corporate action
+#### Note:  Data may not be adjusted to corporate action
